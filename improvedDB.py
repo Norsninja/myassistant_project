@@ -17,10 +17,10 @@ def open_file(filepath):
 openai.api_key = open_file('openaiapikey.txt')
 
 # Create client
-client = MongoClient('mongodb://localhost:27017/')
+client = MongoClient('mongodb+srv://norsninja:Panthera133!@myassistant.vadfb.mongodb.net/?retryWrites=true&w=majority')
 
 # Connect to the database
-db = client.JAX13.conversation
+db = client.myassistant.conversation
 
 conversation = list()
 
@@ -136,10 +136,10 @@ def break_completion(prompt, max_tokens, engine='text-davinci-003', temp=0.7, to
 # Saving Conversation Logs
 def save_conversation_logs(conversation):
    # Create client
-    client = MongoClient('mongodb://localhost:27017/')
+    client = MongoClient('mongodb+srv://norsninja:Panthera133!@myassistant.vadfb.mongodb.net/?retryWrites=true&w=majority')
 
 # Connect to the database
-    db = client.JAX13.conversation
+    db = client.myassistant.conversation
 
 def save_conversation_logs(conversation):
     # Insert document
