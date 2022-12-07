@@ -17,7 +17,7 @@ def open_file(filepath):
 openai.api_key = open_file('openaiapikey.txt')
 
 # Create client
-client = MongoClient('mongodb+srv://norsninja:Panthera133!@myassistant.vadfb.mongodb.net/?retryWrites=true&w=majority')
+client = MongoClient('mongodb+srv://username:password!@myassistant.vadfb.mongodb.net/?retryWrites=true&w=majority')
 
 # Connect to the database
 db = client.myassistant.conversation
