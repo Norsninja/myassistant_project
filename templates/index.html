@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chatbot</title>
+	<link rel="stylesheet" type="text/css" href="http://localhost/styles.css">
+
+</head>
+<body>
+<div id="chatbox">
+        <form action="" method="POST">
+			<div id="conversation">
+        {% if conversation %}
+        {% for log in conversation %}
+				<p class="flex-align-left-right"> <span>User: {{ log.user_input }}</span> <span>Assistant: {{ log.assistant_response }}</span></p> 
+        {% endfor %}
+        {% endif %}
+			</div>
+            <input type="text" name="user_input" id="user_input">
+            <input type="submit" name="submit" id="chat_submit" value="GO">
+        </form>
+    </div>
+<script>
+    // Add an event listener to the form submission
+    document.getElementById('chat_submit').addEventListener('click', function(e) {
+        // Prevent the page from reloading
+        e.preventDefault();
+
+        // Get the conversation logs
+        let xhr = new XMLHttpRequest();
+        xhr.open('POST', '/update_conversation');
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                // Update the conversation logs
+                let chatbox = document.getElementById('conversation');
+                chatbox.innerHTML += '<p>User: ' + document.getElementById('user_input').value + '</p>';
+                chatbox.innerHTML += '<p>' + xhr.responseText + '</p>';
+                // Clear the text input
+                document.getElementById('user_input').value = '';
+            }
+        };
+        xhr.send('user_input=' + document.getElementById('user_input').value);
+    });
+</script>
+</body>
+</html>
