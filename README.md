@@ -24,3 +24,16 @@ In the far future, we plan to train Assistant on the necessary skills and knowle
 We welcome contributions to this project from anyone who is interested. If you have an idea for a new feature or improvement, please feel free to open an issue or pull request on GitHub. Together, we can continue to improve and expand this project.
 
 In the meantime, here's a joke to lighten the mood: Why was the computer cold? Because it left its Windows open!
+
+### Instructions
+
+1. Download and install the latest version of XAMPP.
+2. Install the required Python libraries. 
+3. Install the OpenAI API key to the openaiapikey.txt file.
+4. Create a new MongoDB database and connect to it using the MongoClient command.
+5. Create the assistant.py, web-app.py and index.html files.
+6. Place the files in the root directory of the XAMPP installation. 
+7. Start the Apache server in the XAMPP Control Panel.
+8. Open the web-app.py file in a text editor and set the Flask app to debug mode. 
+9. Run the web-app.py file.
+10. Open the browser and navigate to http://localhost:5000
