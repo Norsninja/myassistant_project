@@ -1,36 +1,23 @@
+
+# Imports
 import openai
 import os
 import nltk 
 import numpy as np 
 import pandas as pd
-from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
 from pymongo import MongoClient
+import random
+import string
+import bs4
 
+# File Functions
 def open_file(filepath):
     with open(filepath, 'r', encoding='utf-8') as infile:
         return infile.read()
-
-
-openai.api_key = open_file('openaiapikey.txt')
-
-# Create client
-client = MongoClient('mongodb+srv://username:Password@myassistant.vadfb.mongodb.net/?retryWrites=true&w=majority')
-
-# Connect to the database
-db = client.myassistant.conversation
-
-conversation = list()
-
-# Insert document
-db.conversations.insert_one({
-    'logs': conversation
-})
-
-# Retrieve conversation logs
-logs = db.conversations.find_one()['logs']
 
 # NLP Feature Extraction
 def featurize_sentence(sentence):
@@ -132,33 +119,53 @@ def break_completion(prompt, max_tokens, engine='text-davinci-003', temp=0.7, to
                 split_prompts.append(response)
                 token_count += tokens
     return split_prompts
-    
-# Saving Conversation Logs
-def save_conversation_logs(conversation):
-   # Create client
-    client = MongoClient('mongodb+srv://username:password@myassistant.vadfb.mongodb.net/?retryWrites=true&w=majority')
+
+# Database Functions
+# Create client
+client = MongoClient('mongodb+srv://username:password@myassistant.vadfb.mongodb.net/?retryWrites=true&w=majority')
 
 # Connect to the database
-    db = client.myassistant.conversation
+db = client.myassistant.conversation
 
+# Saving Conversation Logs
+conversation = []
 def save_conversation_logs(conversation):
     # Insert document
     db.conversations.insert_one({
         'logs': conversation
     })
 
-if __name__ == '__main__':
-    # Retrieve conversation logs
-    logs = db.conversations.find_one()['logs']
+class Assistant:
+    def __init__(self):
+        # Initialize OpenAI API Key
+        openai.api_key = open_file('openaiapikey.txt')
 
-    conversation = list()
-    while True:
-        user_input = input('USER: ')
+    # Process user input and generate chatbot response
+    def process_input(self, user_input):
+        # Retrieve conversation logs
+        logs = db.conversations.find_one()['logs']
+        conversation = list()
         conversation.append('USER: %s' % user_input)
         text_block = '\n'.join(conversation)
         prompt = open_file('prompt_chat.txt').replace('<<BLOCK>>', text_block)
-        prompt = prompt + '\nJAX:'
+        prompt = prompt + '\nAssistant:'
         response = gpt3_completion(prompt)
-        print('JAX:', response)
-        conversation.append('JAX: %s' % response)
+        print('Assistant:', response)
+        conversation.append('Assistant: %s' % response)
         save_conversation_logs(conversation)
+        return response
+
+
+
+if __name__ == '__main__':
+    openai.api_key = open_file('openaiapikey.txt')
+    assistant1 = Assistant()
+
+
+   
+  # Retrieve conversation logs
+    logs = db.conversations.find_one()['logs']
+    
+    while True:
+        user_input = input('USER: ')
+        response = assistant1.process_input(user_input)
