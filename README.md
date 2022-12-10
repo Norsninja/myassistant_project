@@ -34,6 +34,5 @@ In the meantime, here's a joke to lighten the mood: Why was the computer cold? B
 5. Create the assistant.py, web-app.py and index.html files.
 6. Place the files in the root directory of the XAMPP installation. 
 7. Start the Apache server in the XAMPP Control Panel.
-8. Open the web-app.py file in a text editor and set the Flask app to debug mode. 
-9. Run the web-app.py file.
-10. Open the browser and navigate to http://localhost:5000
+8. Run the web-app.py file.
+9. Open the browser and navigate to http://localhost:5000
