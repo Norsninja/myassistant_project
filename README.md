@@ -27,12 +27,9 @@ In the meantime, here's a joke to lighten the mood: Why was the computer cold? B
 
 ### Instructions
 
-1. Download and install the latest version of XAMPP.
-2. Install the required Python libraries. 
-3. Install the OpenAI API key to the openaiapikey.txt file.
-4. Create a new MongoDB database and connect to it using the MongoClient command.
-5. Create the assistant.py, web-app.py and index.html files.
-6. Place the files in the root directory of the XAMPP installation. 
-7. Start the Apache server in the XAMPP Control Panel.
-8. Run the web-app.py file.
-9. Open the browser and navigate to http://localhost:5000
+This is all a work in progress.
+1. Clone the repo
+2. start the virtual environment or remove it and createa new environment
+3. install the dependencies "pip install -r requirements.txt"
+4. run the web-app.py file
+5. open your browser http://127.0.0.1:5000/
